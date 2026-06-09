@@ -1,7 +1,7 @@
 import { useAudio } from "../../context/AudioContext/AudionContext.jsx";
 
 export default function Sidebar() {
-  const { currentTrack, isPlaying, playTrack, togglePlay } = useAudio();
+  const { currentTrack, isPlaying, togglePlay, error } = useAudio();
 
   return (
     <div>
@@ -15,6 +15,7 @@ export default function Sidebar() {
       ) : (
         <h2>chose track!</h2>
       )}
+      {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
   );
 }
