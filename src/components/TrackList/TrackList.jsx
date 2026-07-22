@@ -1,6 +1,7 @@
 import { fetchTracks } from "../../services/api.js";
 import { useAudio } from "../../context/AudioContext/AudionContext.jsx";
 import { useEffect, useState } from "react";
+import "./TrackList.css";
 
 export function TrackList() {
   const [tracks, setTracks] = useState([]);
@@ -15,24 +16,29 @@ export function TrackList() {
   }, [search]);
 
   return (
-    <div>
-      <h2>tracks</h2>
+    <div className="track-list">
+      <h2>Tracks</h2>
 
       <input
+        className="search-input"
         type="text"
         placeholder="Search by name"
         value={search}
         onChange={(event) => setSearch(event.target.value)}
       />
 
-      {tracks.map((track) => (
-        <div key={track.id}>
-          <img src={track.image} alt={track.name} width="120" />
-          <p>{track.name}</p>
-          <p>{track.artist_name}</p>
-          <button onClick={() => playTrack(track)}>play</button>
-        </div>
-      ))}
+      <div className="tracks-grid">
+        {tracks.map((track) => (
+          <div className="track-card" key={track.id}>
+            <img src={track.image} alt={track.name} />
+
+            <h3>{track.name}</h3>
+            <p>{track.artist_name}</p>
+
+            <button onClick={() => playTrack(track)}>Play</button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

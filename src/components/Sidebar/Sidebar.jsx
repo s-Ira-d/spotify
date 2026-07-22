@@ -1,21 +1,40 @@
 import { useAudio } from "../../context/AudioContext/AudionContext.jsx";
+import "./Sidebar.css";
+import { NavLink } from "react-router-dom";
 
 export default function Sidebar() {
   const { currentTrack, isPlaying, togglePlay, error } = useAudio();
 
   return (
-    <div>
-      <h1>MINI PLAYER</h1>
+    <div className="sidebar">
+      <h1>Mini Spotify</h1>
+
+      <nav className="menu">
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="/search">Search</NavLink>
+        <NavLink to="/favorites">Favorites</NavLink>
+      </nav>
+
       {currentTrack ? (
         <>
+          <img
+            src={currentTrack.image}
+            alt={currentTrack.name}
+            className="player-image"
+          />
+
           <h2>{currentTrack.name}</h2>
-          <h2>{currentTrack.artist_name}</h2>
-          <button onClick={togglePlay}>{isPlaying ? "pause" : "play"}</button>
+          <p>{currentTrack.artist_name}</p>
+
+          <button className="play-btn" onClick={togglePlay}>
+            {isPlaying ? "Pause" : "Play"}
+          </button>
         </>
       ) : (
-        <h2>chose track!</h2>
+        <h3>Select track</h3>
       )}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+
+      {error && <p>{error}</p>}
     </div>
   );
 }

@@ -1,0 +1,46 @@
+.track-list {
+  flex: 1;
+  padding: 30px;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 30px;
+}
+
+.tracks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.track-card {
+  background: #181818;
+  padding: 15px;
+  border-radius: 12px;
+  transition: 0.3s;
+}
+
+.track-card:hover {
+  background: #282828;
+}
+
+.track-card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.track-card button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 30px;
+  background: #1db954;
+  color: white;
+  cursor: pointer;
+}
