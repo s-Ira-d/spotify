@@ -27,7 +27,9 @@ export default function HomePage() {
 
             <p>{track.artist_name}</p>
 
-            <button onClick={() => playTrack(track)}>Play</button>
+            <button className="play3-btn" onClick={() => playTrack(track)}>
+              Play
+            </button>
           </div>
         ))}
       </div>
