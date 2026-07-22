@@ -10,11 +10,15 @@ export function TrackList() {
   const { playTrack } = useAudio();
 
   useEffect(() => {
+    if (!search.trim()) {
+      setTracks([]);
+      return;
+    }
+
     fetchTracks(search)
       .then(setTracks)
       .catch((error) => console.error(error));
   }, [search]);
-
   return (
     <div className="track-list">
       <h2>Tracks</h2>

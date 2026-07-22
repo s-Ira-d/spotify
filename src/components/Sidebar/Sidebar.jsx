@@ -3,7 +3,8 @@ import "./Sidebar.css";
 import { NavLink } from "react-router-dom";
 
 export default function Sidebar() {
-  const { currentTrack, isPlaying, togglePlay, error } = useAudio();
+  const { currentTrack, isPlaying, togglePlay, error, addToFavorites } =
+    useAudio();
 
   return (
     <div className="sidebar">
@@ -29,10 +30,12 @@ export default function Sidebar() {
           <button className="play-btn" onClick={togglePlay}>
             {isPlaying ? "Pause" : "Play"}
           </button>
+
+          <button className="favorite-btn" onClick={addToFavorites}>
+            ❤️
+          </button>
         </>
-      ) : (
-        <h3>Select track</h3>
-      )}
+      ) : null}
 
       {error && <p>{error}</p>}
     </div>

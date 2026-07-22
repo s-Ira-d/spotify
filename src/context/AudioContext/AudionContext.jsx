@@ -6,6 +6,9 @@ export function AudioProvider({ children }) {
   const [currentTrack, setCurrentTrack] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [error, setError] = useState(null);
+  const [favorites, setFavorites] = useState(
+    JSON.parse(localStorage.getItem("favorites")) || [],
+  );
 
   const audioRef = useRef(new Audio());
 
@@ -55,6 +58,28 @@ export function AudioProvider({ children }) {
     setIsPlaying(!isPlaying);
   };
 
+  const addToFavorites = () => {
+    if (!currentTrack) return;
+
+    const exists = favorites.some((track) => track.id === currentTrack.id);
+
+    if (exists) return;
+
+    const updatedFavorites = [...favorites, currentTrack];
+
+    setFavorites(updatedFavorites);
+
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+  };
+
+  const removeFromFavorites = (trackId) => {
+    const updatedFavorites = favorites.filter((track) => track.id !== trackId);
+
+    setFavorites(updatedFavorites);
+
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+  };
+
   return (
     <AudioContext.Provider
       value={{
@@ -63,6 +88,9 @@ export function AudioProvider({ children }) {
         playTrack,
         togglePlay,
         error,
+        favorites,
+        addToFavorites,
+        removeFromFavorites,
       }}
     >
       {children}
